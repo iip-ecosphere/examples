@@ -15,12 +15,9 @@ package de.iip_ecosphere.platform.examples.hm23.drive.mock;
 import java.io.InputStream;
 import java.util.function.Predicate;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
-import de.iip_ecosphere.platform.services.environment.IipStringStyle;
 import de.iip_ecosphere.platform.services.environment.YamlService;
 import de.iip_ecosphere.platform.services.environment.testing.DataRecorder;
+import de.iip_ecosphere.platform.support.StringUtils;
 import de.iip_ecosphere.platform.support.iip_aas.ApplicationSetup;
 import de.iip_ecosphere.platform.transport.status.TraceRecord;
 import iip.datatypes.BeckhoffOutput;
@@ -36,8 +33,6 @@ import iip.datatypes.PlcOutput;
  * @author Holger Eichelberger, SSE
  */
 public class DriveAppAas extends de.iip_ecosphere.platform.examples.hm23.drive.DriveAppAas {
-    
-    private static final ToStringStyle TRACE_OUT_STYLE = IipStringStyle.SHORT_STRING_STYLE; // MULTI_LINE_STYLE
     
     /**
      * Creates a service instance from a service id and a YAML artifact.
@@ -69,7 +64,7 @@ public class DriveAppAas extends de.iip_ecosphere.platform.examples.hm23.drive.D
             boolean plcNextOut = payload instanceof PlcOutput;
             boolean plcEnergy = payload instanceof PlcEnergyMeasurementJson;
             if (!beckhoffOut && !plcNextOut && !beckhoffCamOut && !plcEnergy) {
-                System.out.println("APP Trace RCV: " + ReflectionToStringBuilder.toString(data, TRACE_OUT_STYLE));
+                System.out.println("APP Trace RCV: " + StringUtils.toStringShortStyle(data));
             }
             return parentFilter.test(data);
         };

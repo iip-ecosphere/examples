@@ -16,14 +16,11 @@ import java.io.InputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import de.iip_ecosphere.platform.examples.hm22.Commands;
 import de.iip_ecosphere.platform.services.environment.DataIngestor;
-import de.iip_ecosphere.platform.services.environment.IipStringStyle;
 import de.iip_ecosphere.platform.services.environment.YamlService;
 import de.iip_ecosphere.platform.services.environment.services.TransportConverter.ConverterInstances;
+import de.iip_ecosphere.platform.support.StringUtils;
 import de.iip_ecosphere.platform.support.aas.Aas;
 import de.iip_ecosphere.platform.support.iip_aas.ApplicationSetup;
 import de.iip_ecosphere.platform.transport.status.TraceRecord;
@@ -39,7 +36,6 @@ import iip.datatypes.PlcOutput;
  */
 public class AppAas extends de.iip_ecosphere.platform.examples.hm22.AppAas {
 
-    private static final ToStringStyle TRACE_OUT_STYLE = IipStringStyle.SHORT_STRING_STYLE; // MULTI_LINE_STYLE
     private static final boolean DO_EVENTS = Boolean.valueOf(System.getProperty("iip.app.hm22.mock.doEvents", "true"));
     private static final boolean LOG_ALL = Boolean.valueOf(System.getProperty("iip.app.hm22.mock.logAll", "false"));
     private Timer timer;
@@ -145,7 +141,7 @@ public class AppAas extends de.iip_ecosphere.platform.examples.hm22.AppAas {
                 }
             }
             if (log) {
-                System.out.println("APP Trace RCV: " + ReflectionToStringBuilder.toString(data, TRACE_OUT_STYLE) 
+                System.out.println("APP Trace RCV: " + StringUtils.toStringShortStyle(data) 
                     + " doEvents: " + DO_EVENTS + " logAll: " + LOG_ALL);
             }
             if (DO_EVENTS) {

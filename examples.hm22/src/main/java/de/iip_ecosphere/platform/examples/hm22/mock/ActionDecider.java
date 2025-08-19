@@ -16,10 +16,9 @@ import java.io.File;
 import java.io.InputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import de.iip_ecosphere.platform.services.environment.DataIngestor;
-import de.iip_ecosphere.platform.services.environment.IipStringStyle;
+import de.iip_ecosphere.platform.support.StringUtils;
 import iip.datatypes.AiResult;
 import iip.datatypes.Command;
 import iip.datatypes.MdzhOutput;
@@ -115,8 +114,7 @@ public class ActionDecider extends de.iip_ecosphere.platform.examples.hm22.Actio
 
     @Override
     protected void storeToJson(File file, Object data) {
-        System.out.println("Storing (" + file + ") " 
-            + ReflectionToStringBuilder.toString(data, IipStringStyle.SHORT_STRING_STYLE)); 
+        System.out.println("Storing (" + file + ") " + StringUtils.toStringShortStyle(data)); 
         super.storeToJson(file, data);
         file.deleteOnExit();
     }

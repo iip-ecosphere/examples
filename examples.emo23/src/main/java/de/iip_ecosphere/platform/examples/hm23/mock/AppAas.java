@@ -17,16 +17,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Predicate;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import de.iip_ecosphere.platform.examples.hm23.Commands;
 import de.iip_ecosphere.platform.services.environment.DataIngestor;
-import de.iip_ecosphere.platform.services.environment.IipStringStyle;
 import de.iip_ecosphere.platform.services.environment.YamlService;
 import de.iip_ecosphere.platform.services.environment.services.TransportConverter;
 import de.iip_ecosphere.platform.services.environment.services.TransportConverter.ConverterInstances;
 import de.iip_ecosphere.platform.services.environment.testing.DataRecorder;
+import de.iip_ecosphere.platform.support.StringUtils;
 import de.iip_ecosphere.platform.support.iip_aas.ApplicationSetup;
 import de.iip_ecosphere.platform.support.json.JsonUtils;
 import de.iip_ecosphere.platform.transport.connectors.TransportConnector;
@@ -47,7 +44,6 @@ import iip.datatypes.PlcOutput;
  */
 public class AppAas extends de.iip_ecosphere.platform.examples.hm23.AppAas {
 
-    private static final ToStringStyle TRACE_OUT_STYLE = IipStringStyle.SHORT_STRING_STYLE; // MULTI_LINE_STYLE
     private static final boolean DO_EVENTS = Boolean.valueOf(System.getProperty("iip.app.hm23.mock.doEvents", "true"));
     private static final boolean DO_TRANSPORT_OUT = Boolean.valueOf(
         System.getProperty("iip.app.hm23.mock.doTransportOut", "true"));
@@ -157,7 +153,7 @@ public class AppAas extends de.iip_ecosphere.platform.examples.hm23.AppAas {
                 }
             }
             if (log) {
-                System.out.println("APP Trace RCV: " + ReflectionToStringBuilder.toString(data, TRACE_OUT_STYLE) 
+                System.out.println("APP Trace RCV: " + StringUtils.toStringShortStyle(data) 
                     + " doEvents: " + DO_EVENTS + " logAll: " + LOG_ALL);
             }
             if (DO_EVENTS) { // decision about passing to AAS happens in parent
