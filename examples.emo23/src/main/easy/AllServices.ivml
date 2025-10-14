@@ -58,8 +58,8 @@ project AllServices {
         
         input = {{type=refBy(PlcInput), forward=false}},
         output = {{type=refBy(PlcOutput)}},
-        inInterface = {type=refBy(PlcInput), path="Objects/PLCnext/Arp.Plc.Eclr/RobInstance01/"},
-        outInterface = {type=refBy(PlcOutput), path="Objects/PLCnext/Arp.Plc.Eclr/RobInstance01/"},
+        inInterface = {{type=refBy(PlcInput), path="Objects/PLCnext/Arp.Plc.Eclr/RobInstance01/"}},
+        outInterface = {{type=refBy(PlcOutput), path="Objects/PLCnext/Arp.Plc.Eclr/RobInstance01/"}},
         traceRcv = TraceKind::TRACE,
         traceSent = TraceKind::TRACE
     };
@@ -86,8 +86,8 @@ project AllServices {
         
         input = {{type=refBy(MdzhInput)}, {type=refBy(Command), forward=false}},
         output = {{type=refBy(MdzhOutput)}},
-        inInterface = {type=refBy(MdzhInput)}, 
-        outInterface = {type=refBy(MdzhOutput), path="ProductData/"},
+        inInterface = {{type=refBy(MdzhInput)}}, 
+        outInterface = {{type=refBy(MdzhOutput), path="ProductData/"}},
         traceRcv = TraceKind::TRACE,
         traceSent = TraceKind::TRACE
     };
@@ -397,8 +397,8 @@ project AllServices {
         
         input = {{type=refBy(BeckhoffInput), forward=false}},
         output = {{type=refBy(BeckhoffOutput)}},
-        inInterface = {type=refBy(BeckhoffInput), path="Objects/PLC1/GVL_OPCIMG_1/"},
-        outInterface = {type=refBy(BeckhoffOutput), path="Objects/PLC1/GVL_OPCIMG_1/"},
+        inInterface = {{type=refBy(BeckhoffInput), path="Objects/PLC1/GVL_OPCIMG_1/"}},
+        outInterface = {{type=refBy(BeckhoffOutput), path="Objects/PLC1/GVL_OPCIMG_1/"}},
         traceRcv = TraceKind::TRACE,
         traceSent = TraceKind::TRACE
     };
@@ -433,8 +433,8 @@ project AllServices {
         
         input = {{type=refBy(DriveCommand), forward=false}},
         output = {{type=refBy(DriveBeckhoffOutput)}},
-        inInterface = {type=refBy(DriveCommand), path="Objects/PLC1/GVL_AxisOPC/"},
-        outInterface = {type=refBy(DriveBeckhoffOutput), path="Objects/PLC1/GVL_AxisOPC/"},
+        inInterface = {{type=refBy(DriveCommand), path="Objects/PLC1/GVL_AxisOPC/"}},
+        outInterface = {{type=refBy(DriveBeckhoffOutput), path="Objects/PLC1/GVL_AxisOPC/"}},
         traceRcv = TraceKind::TRACE,
         traceSent = TraceKind::TRACE
     };
@@ -452,8 +452,8 @@ project AllServices {
         output = {{type=refBy(LenzeDriveMeasurement)}},
         inChannel = "Oscillogram_1",
         outChannel = "Oscillogram_1",
-        inInterface = {type=refBy(Dummy)},
-        outInterface = {type=refBy(LenzeDriveMeasurement)},
+        inInterface = {{type=refBy(Dummy)}},
+        outInterface = {{type=refBy(LenzeDriveMeasurement)}},
         traceRcv = TraceKind::TRACE,
         traceSent = TraceKind::TRACE,
         machineFormatter = JsonFormatter{},
@@ -481,9 +481,9 @@ project AllServices {
         //outChannel = "energy/EEM-MA370/+",
         outChannel = "energy/EEM-MA370J",
         //outChannels = {"energy/EEM-EM375/Current_L1", "energy/EEM-EM375/Voltage_L1", "energy/EEM-EM375/Current_L2", "energy/EEM-EM375/Voltage_L2", "energy/EEM-EM375/Current_L3", "energy/EEM-EM375/Voltage_L3", "energy/EEM-EM375/Voltage_U12", "energy/EEM-EM375/Voltage_U23", "energy/EEM-EM375/Voltage_U31", "energy/EEM-EM375/Real_PE_L1", "energy/EEM-EM375/Real_PE_L2", "energy/EEM-EM375/Real_PE_L3"},
-        inInterface = {type=refBy(PlcEnergyIn)},
-        //outInterface = {type=refBy(PlcEnergyMeasurement)},
-        outInterface = {type=refBy(PlcEnergyMeasurementJson)},
+        inInterface = {{type=refBy(PlcEnergyIn)}},
+        //outInterface = {{type=refBy(PlcEnergyMeasurement)}},
+        outInterface = {{type=refBy(PlcEnergyMeasurementJson)}},
         machineFormatter = JsonFormatter{},
         machineParser = JsonParser{}
         /*machineFormatter = TextLineFormatter{separator="/"}, 
