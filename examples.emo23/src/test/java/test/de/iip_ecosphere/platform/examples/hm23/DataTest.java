@@ -23,7 +23,6 @@ import de.iip_ecosphere.platform.connectors.CachingStrategy;
 import de.iip_ecosphere.platform.connectors.ConnectorParameter.CacheMode;
 import de.iip_ecosphere.platform.services.environment.services.TransportConverterFactory;
 import de.iip_ecosphere.platform.support.CollectionUtils;
-import de.iip_ecosphere.platform.support.json.JsonUtils;
 import de.iip_ecosphere.platform.transport.serialization.GenericJsonToStringTranslator;
 import de.iip_ecosphere.platform.transport.serialization.TypeTranslator;
 import de.iip_ecosphere.platform.connectors.DefaultCachingStrategy;
@@ -107,8 +106,7 @@ public class DataTest {
         String[] exclFields =  excludedFields.toArray(new String[excludedFields.size()]);
 
         if (typeTranslator instanceof GenericJsonToStringTranslator) {
-            JsonUtils.exceptFields(((GenericJsonToStringTranslator<?>) typeTranslator).getMapper(), 
-                exclFields);
+            ((GenericJsonToStringTranslator<?>) typeTranslator).getMapper().exceptFields(exclFields);
         }
         
         DriveAiResult result = new DriveAiResultImpl();

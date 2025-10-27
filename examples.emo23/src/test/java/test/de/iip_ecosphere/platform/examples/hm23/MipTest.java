@@ -22,8 +22,8 @@ import iip.datatypes.MipAiPythonOutputImpl;
 import iip.datatypes.MipMqttInputImpl;
 import iip.datatypes.MipMqttOutput;
 import iip.datatypes.MipMqttOutputImpl;
-import iip.nodes.MipMQTTDataConnectorFormatterSerializer;
-import iip.nodes.MipMQTTDataConnectorParserSerializer;
+import iip.nodes.MipMQTTDataConnectorMipMqttOutputFormatterSerializer;
+import iip.nodes.MipMQTTDataConnectorMipMqttInputParserSerializer;
 import iip.serializers.MipAiPythonOutputImplSerializer;
 import org.junit.Assert;
 
@@ -88,8 +88,8 @@ public class MipTest {
     public void testMipParserFormatter() throws IOException {
         
         
-        MipMQTTDataConnectorParserSerializer pSer 
-            = new MipMQTTDataConnectorParserSerializer("US-ASCII", null, null);
+        MipMQTTDataConnectorMipMqttInputParserSerializer pSer 
+            = new MipMQTTDataConnectorMipMqttInputParserSerializer("US-ASCII", null, null);
         
         MipMqttOutputImpl outData = new MipMqttOutputImpl();
         outData.setMipcontext("read_idtag_data");
@@ -132,8 +132,8 @@ public class MipTest {
         inData.setMipbitstream_ai_data2("0000000000000000000000");
         inData.setMipreader(outData.getMipreader());
         
-        MipMQTTDataConnectorFormatterSerializer fSer 
-            = new MipMQTTDataConnectorFormatterSerializer("US-ASCII", null, null);
+        MipMQTTDataConnectorMipMqttOutputFormatterSerializer fSer 
+            = new MipMQTTDataConnectorMipMqttOutputFormatterSerializer("US-ASCII", null, null);
         GenericJsonSerializer<MipMqttInputImpl> inSer = new GenericJsonSerializer<>(MipMqttInputImpl.class);
         MipMqttInputImpl fIn = inSer.from(fSer.to(inData));
 

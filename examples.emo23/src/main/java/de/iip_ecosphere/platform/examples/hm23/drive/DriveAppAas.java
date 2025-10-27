@@ -48,7 +48,6 @@ import de.iip_ecosphere.platform.support.aas.AasUtils;
 import de.iip_ecosphere.platform.support.aas.BasicSetupSpec;
 import de.iip_ecosphere.platform.support.aas.Submodel.SubmodelBuilder;
 import de.iip_ecosphere.platform.support.iip_aas.ApplicationSetup;
-import de.iip_ecosphere.platform.support.json.JsonUtils;
 import de.iip_ecosphere.platform.transport.AppIntercom;
 import de.iip_ecosphere.platform.transport.Transport;
 import de.iip_ecosphere.platform.transport.connectors.TransportConnector;
@@ -352,7 +351,7 @@ public class DriveAppAas extends TraceToAasService implements iip.interfaces.Dri
             protected <T> Serializer<T> createDefault(Class<T> type) {
                 GenericJsonSerializer<T> r = new GenericJsonSerializer<>(type);
                 if (TraceRecord.class == type) {
-                    JsonUtils.exceptFields(r.getMapper(), EXCLUDED_FIELDS);
+                    r.getMapper().exceptFields(EXCLUDED_FIELDS);
                 }
                 return r;
             }
