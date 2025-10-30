@@ -630,6 +630,7 @@
       <groupId>org.apache.qpid</groupId>
       <artifactId>qpid-broker</artifactId>
       <scope>test</scope>
+      <version>${org.apache.qpid.version}</version>
     </dependency>
     <dependency>
       <groupId>de.iip-ecosphere.platform</groupId>
