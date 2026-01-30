@@ -12,5 +12,6 @@
             <arg value="-Diip.ciBuildId=${build_num}"/> <!-- must be set in jenkins ANT build step -->
             <arg value="-Dokto.mvn.home=${maven.bin.dir}/bin"/>
         </maven>
+		<delete dir="${java.io.tmpdir}/iipHm22Data"/> <!-- storage dir for AI feedback files -->
 	</target>
 </project>
