@@ -14,8 +14,7 @@ package test.de.iip_ecosphere.platform.examples.hm23.connectivity;
 
 import java.io.IOException;
 
-import org.slf4j.LoggerFactory;
-
+import de.iip_ecosphere.platform.support.logging.LoggerFactory;
 import de.iip_ecosphere.platform.transport.connectors.TransportParameter;
 import de.iip_ecosphere.platform.transport.mqttv3.PahoMqttV3TransportConnector;
 

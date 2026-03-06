@@ -15,9 +15,8 @@ package de.iip_ecosphere.platform.examples.hm23.mock;
 import java.io.File;
 import java.io.InputStream;
 
-import org.apache.commons.io.FileUtils;
-
 import de.iip_ecosphere.platform.services.environment.DataIngestor;
+import de.iip_ecosphere.platform.support.FileUtils;
 import de.iip_ecosphere.platform.support.StringUtils;
 import iip.datatypes.AiResult;
 import iip.datatypes.BeckhoffOutput;

@@ -17,8 +17,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import org.slf4j.LoggerFactory;
-
+import de.iip_ecosphere.platform.support.logging.LoggerFactory;
 import de.iip_ecosphere.platform.transport.AppIntercom;
 import iip.datatypes.Command;
 import iip.datatypes.PlcInput;

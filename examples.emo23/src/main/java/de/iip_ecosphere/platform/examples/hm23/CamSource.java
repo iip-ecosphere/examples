@@ -23,7 +23,10 @@ import javax.imageio.ImageIO;
 
 import de.iip_ecosphere.platform.services.environment.DataIngestor;
 import de.iip_ecosphere.platform.services.environment.ServiceKind;
+import de.iip_ecosphere.platform.support.FileUtils;
+import de.iip_ecosphere.platform.support.IOUtils;
 import de.iip_ecosphere.platform.support.TimeUtils;
+import de.iip_ecosphere.platform.support.logging.LoggerFactory;
 import de.iip_ecosphere.platform.support.resources.FolderResourceResolver;
 import de.iip_ecosphere.platform.support.resources.ResourceResolver;
 import iip.datatypes.Command;
@@ -32,14 +35,10 @@ import iip.datatypes.ImageInput;
 import iip.datatypes.ImageInputImpl;
 import iip.impl.CamImageSourceImpl;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.output.ByteArrayOutputStream;
-import org.slf4j.LoggerFactory;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -20,8 +20,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
-import org.slf4j.LoggerFactory;
-
 import de.iip_ecosphere.platform.examples.hm23.CobotCommands;
 import de.iip_ecosphere.platform.examples.hm23.Commands;
 import de.iip_ecosphere.platform.services.environment.DataIngestor;
@@ -48,6 +46,7 @@ import de.iip_ecosphere.platform.support.aas.AasUtils;
 import de.iip_ecosphere.platform.support.aas.BasicSetupSpec;
 import de.iip_ecosphere.platform.support.aas.Submodel.SubmodelBuilder;
 import de.iip_ecosphere.platform.support.iip_aas.ApplicationSetup;
+import de.iip_ecosphere.platform.support.logging.LoggerFactory;
 import de.iip_ecosphere.platform.transport.AppIntercom;
 import de.iip_ecosphere.platform.transport.Transport;
 import de.iip_ecosphere.platform.transport.connectors.TransportConnector;

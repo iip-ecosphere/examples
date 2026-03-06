@@ -16,11 +16,10 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.LoggerFactory;
-
 import de.iip_ecosphere.platform.kiServices.functions.aggregation.MultiChannelTimeSeriesAggregator;
 import de.iip_ecosphere.platform.kiServices.functions.aggregation.MultiChannelTimeSeriesAggregator.*;
 import de.iip_ecosphere.platform.services.environment.ServiceKind;
+import de.iip_ecosphere.platform.support.logging.LoggerFactory;
 import iip.datatypes.AggregatedPlcEnergyMeasurement;
 import iip.datatypes.AggregatedPlcEnergyMeasurementImpl;
 import iip.datatypes.DriveCommand;

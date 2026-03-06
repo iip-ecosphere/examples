@@ -15,10 +15,8 @@ package de.iip_ecosphere.platform.examples.hm23.carAas;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import de.iip_ecosphere.platform.examples.hm23.carAas.CarsYaml.Car;
+import de.iip_ecosphere.platform.support.StringUtils;
 
 /**
  * Reads/prints a {@link CarsYaml}.
@@ -44,7 +42,7 @@ public class CarsYamlPrinter {
             FileInputStream fis = new FileInputStream(fileName);
             CarsYaml cars = CarsYaml.readFromYaml(fis);
             for (Car c : cars.getCars()) {
-                System.out.println(ReflectionToStringBuilder.toString(c, ToStringStyle.MULTI_LINE_STYLE));
+                System.out.println(StringUtils.toStringMultiLineStyle(c));
             }
             fis.close();
         } catch (IOException e) {

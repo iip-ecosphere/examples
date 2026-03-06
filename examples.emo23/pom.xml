@@ -653,24 +653,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-     <groupId>de.iip-ecosphere.platform</groupId>
-     <artifactId>connectors.mqttv5</artifactId>
-     <version>${project.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-     <groupId>de.iip-ecosphere.platform</groupId>
-     <artifactId>connectors.mqttv3</artifactId>
-     <version>${project.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-     <groupId>de.iip-ecosphere.platform</groupId>
-     <artifactId>connectors.opcuav1</artifactId>
-     <version>${project.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <artifactId>services.spring</artifactId>
       <groupId>de.iip-ecosphere.platform</groupId>
       <version>${project.version}</version>

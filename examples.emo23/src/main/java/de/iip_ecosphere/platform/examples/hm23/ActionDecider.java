@@ -24,13 +24,11 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import de.iip_ecosphere.platform.services.environment.ServiceKind;
 import de.iip_ecosphere.platform.services.environment.ServiceState;
 import de.iip_ecosphere.platform.support.TimeUtils;
+import de.iip_ecosphere.platform.support.json.Json;
+import de.iip_ecosphere.platform.support.logging.LoggerFactory;
 import de.iip_ecosphere.platform.transport.AppIntercom;
 import de.iip_ecosphere.platform.transport.Transport;
 import de.iip_ecosphere.platform.transport.status.TraceRecord;
@@ -259,7 +257,7 @@ public class ActionDecider extends ActionDeciderImpl {
         }
         
         /**
-         * Returns the AI service name. [jackson]
+         * Returns the AI service name. [json]
          * 
          * @return the AI service name
          */
@@ -268,7 +266,7 @@ public class ActionDecider extends ActionDeciderImpl {
         }
         
         /**
-         * Returns the timestamp of the first image. [jackson]
+         * Returns the timestamp of the first image. [json]
          * 
          * @return the timestamp
          */
@@ -277,7 +275,7 @@ public class ActionDecider extends ActionDeciderImpl {
         }
 
         /**
-         * Returns the image number. [jackson]
+         * Returns the image number. [json]
          * 
          * @return the image number, negative if N/A
          */
@@ -308,7 +306,7 @@ public class ActionDecider extends ActionDeciderImpl {
         }
 
         /**
-         * Returns the AI result. [jackson]
+         * Returns the AI result. [json]
          * 
          * @return the AI result
          */
@@ -341,8 +339,7 @@ public class ActionDecider extends ActionDeciderImpl {
      */
     protected void storeToJson(File file, Object data) {
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(file, data);
+            Json.createInstance4All().writeValue(file, data);
         } catch (IOException e) {
             System.out.println("Cannot write " + file.getAbsolutePath() + ": " + e.getMessage());
         }
@@ -369,7 +366,7 @@ public class ActionDecider extends ActionDeciderImpl {
         }
         
         /**
-         * Returns the feedback. [jackson]
+         * Returns the feedback. [json]
          * 
          * @return the feedback
          */

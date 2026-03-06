@@ -14,6 +14,8 @@ package test.de.iip_ecosphere.platform.examples.hm23.connectivity;
 
 import java.io.IOException;
 
+import de.iip_ecosphere.platform.connectors.Connector;
+import de.iip_ecosphere.platform.connectors.ConnectorFactory;
 import de.iip_ecosphere.platform.examples.hm23.drive.ChannelToTimeSeriesAggregator;
 import de.iip_ecosphere.platform.services.environment.DataIngestor;
 import de.iip_ecosphere.platform.support.TimeUtils;
@@ -21,7 +23,6 @@ import de.iip_ecosphere.platform.transport.connectors.ReceptionCallback;
 import de.iip_ecosphere.platform.transport.serialization.SerializerRegistry;
 import iip.datatypes.AggregatedPlcEnergyMeasurement;
 import iip.datatypes.PlcEnergyIn;
-//import iip.datatypes.PlcEnergyMeasurement;
 import iip.datatypes.PlcEnergyMeasurementJson;
 import iip.interfaces.ChannelToTimeSeriesAggregatorInterface;
 import iip.nodes.MqttEnergyConn;
@@ -78,9 +79,10 @@ public class MqttEnergyTest {
         SerializerRegistry.registerSerializer(iip.serializers.PlcInputImplSerializer.class);
         SerializerRegistry.registerSerializer(iip.serializers.PlcInputSerializer.class);
         
-        de.iip_ecosphere.platform.connectors.mqttv3.PahoMqttv3Connector<PlcEnergyMeasurementJson, PlcEnergyIn> 
-            connDrive = new de.iip_ecosphere.platform.connectors.mqttv3.PahoMqttv3Connector<>(
-                MqttEnergyConn.createConnectorAdapter());
+        Connector<byte[], byte[], PlcEnergyMeasurementJson, PlcEnergyIn> connDrive = ConnectorFactory.createConnector(
+            "de.iip_ecosphere.platform.connectors.mqttv3.PahoMqttv3Connector", 
+            () -> MqttEnergyConn.createConnectorParameter(), 
+            MqttEnergyConn.createConnectorAdapter());
         connDrive.connect(MqttEnergyConn.createConnectorParameter());
         connDrive.setReceptionCallback(callbackEnergy);
         connDrive.notificationsChanged(false); // force sampling independent of model

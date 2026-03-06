@@ -12,10 +12,9 @@
 
 package de.iip_ecosphere.platform.examples.hm23.carAas;
 
-import org.slf4j.LoggerFactory;
-
 import de.iip_ecosphere.platform.support.Server;
 import de.iip_ecosphere.platform.support.ServerAddress;
+import de.iip_ecosphere.platform.support.logging.LoggerFactory;
 import de.iip_ecosphere.platform.support.setup.CmdLine;
 
 /**

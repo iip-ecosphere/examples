@@ -15,6 +15,8 @@ package test.de.iip_ecosphere.platform.examples.hm23.connectivity;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
+import de.iip_ecosphere.platform.connectors.Connector;
+import de.iip_ecosphere.platform.connectors.ConnectorFactory;
 import de.iip_ecosphere.platform.examples.hm23.CamSource;
 import de.iip_ecosphere.platform.examples.hm23.Commands;
 import de.iip_ecosphere.platform.services.environment.DataIngestor;
@@ -117,9 +119,10 @@ public class OpcCamTest {
             System.err.println("Cannot set cam parameter: " + e.getMessage());
         }
         
-        de.iip_ecosphere.platform.connectors.opcuav1.OpcUaConnector<BeckhoffOutput, BeckhoffInput> conn = 
-            new de.iip_ecosphere.platform.connectors.opcuav1.OpcUaConnector<>(
-                BeckhoffOPCConnector.createConnectorAdapter(null, null, () -> opcNamespace, () -> opcNamespace));
+        Connector<Object, Object, BeckhoffOutput, BeckhoffInput> conn = ConnectorFactory.createConnector(
+            "de.iip_ecosphere.platform.connectors.opcuav1.OpcUaConnector", 
+            () -> BeckhoffOPCConnector.createConnectorParameter(), 
+            BeckhoffOPCConnector.createConnectorAdapter(null, null, () -> opcNamespace, () -> opcNamespace));
         conn.connect(BeckhoffOPCConnector.createConnectorParameter());
         conn.setReceptionCallback(callback);
         conn.notificationsChanged(false); // force sampling independent of model

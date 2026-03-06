@@ -19,8 +19,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 
-import org.slf4j.LoggerFactory;
-
 import de.iip_ecosphere.platform.services.environment.DataIngestor;
 import de.iip_ecosphere.platform.services.environment.ParameterConfigurer;
 import de.iip_ecosphere.platform.services.environment.ServiceState;
@@ -41,6 +39,7 @@ import de.iip_ecosphere.platform.support.aas.Type;
 import de.iip_ecosphere.platform.support.aas.AasUtils;
 import de.iip_ecosphere.platform.support.aas.BasicSetupSpec;
 import de.iip_ecosphere.platform.support.iip_aas.ApplicationSetup;
+import de.iip_ecosphere.platform.support.logging.LoggerFactory;
 import de.iip_ecosphere.platform.transport.connectors.TransportConnector;
 import de.iip_ecosphere.platform.transport.mqttv3.PahoMqttV3TransportConnector;
 import de.iip_ecosphere.platform.transport.serialization.BasicSerializerProvider;

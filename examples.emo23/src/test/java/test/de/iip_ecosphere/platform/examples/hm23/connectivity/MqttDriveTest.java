@@ -15,10 +15,10 @@ package test.de.iip_ecosphere.platform.examples.hm23.connectivity;
 import java.io.File;
 import java.io.IOException;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import de.iip_ecosphere.platform.connectors.Connector;
+import de.iip_ecosphere.platform.connectors.ConnectorFactory;
 import de.iip_ecosphere.platform.support.TimeUtils;
-import de.iip_ecosphere.platform.support.json.JsonUtils;
+import de.iip_ecosphere.platform.support.json.Json;
 import de.iip_ecosphere.platform.transport.connectors.ReceptionCallback;
 import de.iip_ecosphere.platform.transport.serialization.SerializerRegistry;
 import iip.datatypes.DriveBeckhoffOutput;
@@ -51,8 +51,8 @@ public class MqttDriveTest {
                 System.out.println("Drive: " + data);
                 System.out.println(org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(data));
                 try {
-                    ObjectMapper mapper = new ObjectMapper();
-                    JsonUtils.handleIipDataClasses(mapper); // only if nested?
+                    Json mapper = Json.createInstance4All()
+                        .handleIipDataClasses();
                     mapper.writeValue(new File("./lenze.json"), data);
                 } catch (IOException e) {
                     e.printStackTrace(System.out);
@@ -106,16 +106,18 @@ public class MqttDriveTest {
         SerializerRegistry.registerSerializer(iip.serializers.DriveCommandSerializer.class);
         SerializerRegistry.registerSerializer(iip.serializers.DriveCommandImplSerializer.class);
         
-        de.iip_ecosphere.platform.connectors.mqttv3.PahoMqttv3Connector<LenzeDriveMeasurement, Dummy> connDrive = 
-            new de.iip_ecosphere.platform.connectors.mqttv3.PahoMqttv3Connector<>(
-                LenzeMQTTConnector.createConnectorAdapter());
+        Connector<byte[], byte[], LenzeDriveMeasurement, Dummy> connDrive = ConnectorFactory.createConnector(
+            "de.iip_ecosphere.platform.connectors.mqttv3.PahoMqttv3Connector", 
+            () -> LenzeMQTTConnector.createConnectorParameter(), 
+            LenzeMQTTConnector.createConnectorAdapter());
         connDrive.connect(LenzeMQTTConnector.createConnectorParameter());
         connDrive.setReceptionCallback(callbackDrive);
         connDrive.notificationsChanged(false); // force sampling independent of model
 
-        de.iip_ecosphere.platform.connectors.opcuav1.OpcUaConnector<DriveBeckhoffOutput, DriveCommand> connOpc = 
-            new de.iip_ecosphere.platform.connectors.opcuav1.OpcUaConnector<>(
-                DriveBeckhoffOPCConnector.createConnectorAdapter());
+        Connector<Object, Object, DriveBeckhoffOutput, DriveCommand> connOpc = ConnectorFactory.createConnector(
+            "de.iip_ecosphere.platform.connectors.opcuav1.OpcUaConnector", 
+            () -> DriveBeckhoffOPCConnector.createConnectorParameter(), 
+            DriveBeckhoffOPCConnector.createConnectorAdapter());
         connOpc.connect(DriveBeckhoffOPCConnector.createConnectorParameter());
         connOpc.setReceptionCallback(callbackOpc);
         connOpc.notificationsChanged(false); // force sampling independent of model
