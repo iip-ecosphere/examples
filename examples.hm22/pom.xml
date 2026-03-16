@@ -341,13 +341,14 @@
                            <goal>testApp</goal>
                        </goals>
                        <configuration>
+                           <logFile>${project.build.directory}/app.log</logFile>
                            <logRegExprs>
                                <logRegExpr>.*APP: DecisionResultImpl.*</logRegExpr>
                            </logRegExprs>
                            <appArgs>
                                <appArg>-Diip.app.hm22.mock.callRobot=false</appArg>
                            </appArgs>
-                           <testTime>180000</testTime>
+                           <testTime>200000</testTime>
                        </configuration>
                    </execution>
                </executions>
@@ -507,7 +508,28 @@
       <artifactId>support.aas.basyx</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
+      <exclusions>
+      	<exclusion>
+      		<groupId>org.apache.tomcat</groupId>
+      		<artifactId>tomcat-catalina</artifactId>
+      	</exclusion>
+      </exclusions>
     </dependency>
+<dependency>
+  <groupId>de.iip-ecosphere.platform</groupId>
+  <artifactId>support.commons-apache</artifactId>
+  <version>${project.version}</version>
+</dependency>
+<dependency>
+  <groupId>de.iip-ecosphere.platform</groupId>
+  <artifactId>support.json-jackson</artifactId>
+  <version>${project.version}</version>
+</dependency>
+<dependency>
+  <groupId>de.iip-ecosphere.platform</groupId>
+  <artifactId>support.bytecode-bytebuddy</artifactId>
+  <version>${project.version}</version>
+</dependency>
     <dependency>
       <groupId>de.iip-ecosphere.platform</groupId>
       <artifactId>test.amqp.qpid</artifactId>
@@ -535,16 +557,16 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-     <groupId>de.iip-ecosphere.platform</groupId>
-     <artifactId>connectors.opcuav1</artifactId>
-     <version>${project.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <artifactId>services.spring</artifactId>
       <groupId>de.iip-ecosphere.platform</groupId>
       <version>${project.version}</version>
       <scope>test</scope>
+      <exclusions>
+      	<exclusion>
+      		<groupId>org.springframework.boot</groupId>
+      		<artifactId>spring-boot-starter-tomcat</artifactId>
+      	</exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>

@@ -24,6 +24,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import de.iip_ecosphere.platform.services.environment.DataIngestor;
 import de.iip_ecosphere.platform.services.environment.ServiceKind;
 import de.iip_ecosphere.platform.support.aas.AasUtils;
+import de.iip_ecosphere.platform.support.logging.LoggerFactory;
 import de.iip_ecosphere.platform.support.resources.FolderResourceResolver;
 import de.iip_ecosphere.platform.support.resources.ResourceLoader;
 import de.iip_ecosphere.platform.support.resources.ResourceResolver;
@@ -35,7 +36,6 @@ import iip.impl.CamImageSourceImpl;
 import de.iip_ecosphere.platform.kiServices.functions.images.QRCodeScanner;
 
 import org.apache.commons.io.IOUtils;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
