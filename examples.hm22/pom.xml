@@ -120,7 +120,7 @@
                              </artifactItem>
                              <artifactItem>
                                  <groupId>de.iip-ecosphere.platform</groupId>
-                                 <artifactId>apps.AppInterfacesContainerCreation</artifactId>
+                                 <artifactId>apps.ExampleHm22AppInterfaces</artifactId>
                                  <version>${project.version}</version>
                                  <type>zip</type>
                                  <classifier>python</classifier>
