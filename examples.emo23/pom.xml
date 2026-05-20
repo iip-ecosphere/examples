@@ -462,6 +462,7 @@
                     <outputDirectory>${iip.gen}</outputDirectory>
                     <metaModelDirectory>${project.build.directory}/easy</metaModelDirectory>
                     <modelDirectory>src/main/easy</modelDirectory>
+                    <allServices>true</allServices>
                 </configuration>
             </plugin>
           </plugins>
