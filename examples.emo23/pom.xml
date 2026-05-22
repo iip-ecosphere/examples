@@ -463,7 +463,6 @@
                     <metaModelDirectory>${project.build.directory}/easy</metaModelDirectory>
                     <modelDirectory>src/main/easy</modelDirectory>
                     <allTypes>true</allTypes>
-                    <incremental>true</incremental>
                 </configuration>
             </plugin>
           </plugins>
