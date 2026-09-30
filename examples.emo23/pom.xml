@@ -144,7 +144,7 @@
             <plugins>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.0.2</version>
+                    <version>${org.apache.maven.resources.version}</version>
                     <executions>
                         <execution>
                             <id>copy-identityStore-software</id>
@@ -162,7 +162,7 @@
                                         </includes>
                                     </resource>
                                 </resources>
-                                <overwrite>true</overwrite>
+                                <changeDetection>always</changeDetection>
                             </configuration>
                         </execution>
                         <execution>
