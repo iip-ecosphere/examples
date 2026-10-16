@@ -131,6 +131,7 @@
                 <version>0.1.0-SNAPSHOT</version>
                 <scope>test</scope>
                 <type>test-jar</type>
+                <optional>true</optional>
             </dependency>    
             <dependency>
                 <artifactId>DemonstrationFederatedLearningAppHM23</artifactId>
@@ -138,7 +139,8 @@
                 <version>0.1.0-SNAPSHOT</version>
                 <scope>test</scope>
                 <type>test-jar</type>
-            </dependency>    
+                <optional>true</optional>
+            </dependency>
         </dependencies>
         <build>
             <plugins>
@@ -444,15 +446,15 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>generateAppsNoDeps</id>
+                        <id>generateBootstrappedApps</id>
                         <goals>
-                            <goal>generateAppsNoDeps</goal>
+                            <goal>generateBootstrappedApps</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>generateApps</id>
+                        <id>generateAppsDirect</id>
                         <goals>
-                            <goal>generateApps</goal>
+                            <goal>generateAppsDirect</goal>
                         </goals>
                     </execution>
                     <!-- so far no regression test prepared/defined -->
@@ -531,6 +533,7 @@
                                     <invokeGoal>package</invokeGoal>
                                 </invokeGoals> 
                                 <disableBuild>true</disableBuild>
+                                <skipGenerateSources>true</skipGenerateSources>
                             </configuration>
                         </execution>
                     </executions>

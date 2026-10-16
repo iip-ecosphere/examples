@@ -16,6 +16,7 @@ import java.io.IOException;
 
 import de.iip_ecosphere.platform.connectors.Connector;
 import de.iip_ecosphere.platform.connectors.ConnectorFactory;
+import de.iip_ecosphere.platform.connectors.ConnectorParameter;
 import de.iip_ecosphere.platform.support.TimeUtils;
 import de.iip_ecosphere.platform.transport.connectors.ReceptionCallback;
 import de.iip_ecosphere.platform.transport.serialization.SerializerRegistry;
@@ -23,7 +24,6 @@ import iip.datatypes.PlcInput;
 import iip.datatypes.PlcInputImpl;
 import iip.datatypes.PlcOutput;
 import iip.datatypes.PlcOutputImpl;
-import iip.nodes.PLCnextOPCConnector;
 
 //MAY BE DELETED, NOT PERMANENT !!!
 
@@ -85,19 +85,19 @@ public class OpcRobbiTest {
         
         System.out.println("Robbis may require a QUIT via HMI. Program does not sent PC_QUIT so far.");
 
-        Connector<Object, Object, PlcOutput, PlcInput> connR1 = ConnectorFactory.createConnector(
-            "de.iip_ecosphere.platform.connectors.opcuav1.OpcUaConnector", 
-            () -> PLCnextOPCConnector.createConnectorParameter(), 
-            PLCnextOPCConnector.createConnectorAdapter(() -> ROBBY1_OPC_PATH, () -> ROBBY1_OPC_PATH));
-        connR1.connect(PLCnextOPCConnector.createConnectorParameter());
+        ConnectorParameter params = ConnectorFactory.createConnectorParameter("PlcNextOpcConn");
+        Connector<Object, Object, PlcOutput, PlcInput> connR1 = ConnectorFactory.createConnector("PlcNextOpcConn", 
+            params, () -> ROBBY1_OPC_PATH, () -> ROBBY1_OPC_PATH, Object.class, Object.class, PlcOutput.class, 
+            PlcInput.class);
+        connR1.connect(params);
         connR1.setReceptionCallback(callbackR1);
         connR1.notificationsChanged(false); // force sampling independent of model
 
-        Connector<Object, Object, PlcOutput, PlcInput> connR2 = ConnectorFactory.createConnector(
-            "de.iip_ecosphere.platform.connectors.opcuav1.OpcUaConnector", 
-            () -> PLCnextOPCConnector.createConnectorParameter(), 
-            PLCnextOPCConnector.createConnectorAdapter(() -> ROBBY2_OPC_PATH, () -> ROBBY2_OPC_PATH));
-        connR2.connect(PLCnextOPCConnector.createConnectorParameter());
+        params = ConnectorFactory.createConnectorParameter("PlcNextOpcConn");
+        Connector<Object, Object, PlcOutput, PlcInput> connR2 = ConnectorFactory.createConnector("PlcNextOpcConn", 
+            params, () -> ROBBY2_OPC_PATH, () -> ROBBY2_OPC_PATH, Object.class, Object.class, PlcOutput.class, 
+            PlcInput.class);
+        connR2.connect(params);
         connR2.setReceptionCallback(callbackR2);
         connR2.notificationsChanged(false); // force sampling independent of model
 

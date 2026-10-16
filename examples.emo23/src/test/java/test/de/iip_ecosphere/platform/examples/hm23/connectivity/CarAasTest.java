@@ -27,7 +27,6 @@ import de.iip_ecosphere.platform.transport.connectors.ReceptionCallback;
 import iip.datatypes.Command;
 import iip.datatypes.MdzhInput;
 import iip.datatypes.MdzhOutput;
-import iip.nodes.MDZHAASConnector;
 
 /**
  * Tests the car AAS server/connector. Overrides connector information for local testing! Requires 
@@ -49,12 +48,13 @@ public class CarAasTest {
         CarsAasServer server = new CarsAasServer(new String[] {"--host", host, "--port", String.valueOf(port)});
         server.start();
         
-        ConnectorParameter param = ConnectorParameterBuilder.newBuilder(
-            MDZHAASConnector.createConnectorParameter(), host, port, null)
+        // as configured, or create own and customize
+        ConnectorParameter param = ConnectorFactory.createConnectorParameter("MdzhAasConn");
+        param = ConnectorParameterBuilder.newBuilder(param, host, port, null)
             .setEndpointPath("http://" + host + ":" + port + "/registry").build();
-        Connector<Object, Object, MdzhOutput, MdzhInput> conn = ConnectorFactory.createConnector(
-            "de.iip_ecosphere.platform.connectors.aas.AasConnector", () -> param, 
-            MDZHAASConnector.createConnectorAdapter(()->"", ()->"ProductData/"));
+        Connector<Object, Object, MdzhOutput, MdzhInput> conn = ConnectorFactory.createConnector("MdzhAasConn", param,
+            ()->"", ()->"ProductData/", Object.class, Object.class, MdzhOutput.class, MdzhInput.class);
+        
         conn.setReceptionCallback(new ReceptionCallback<MdzhOutput>() {
             
             @Override

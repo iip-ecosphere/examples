@@ -122,7 +122,7 @@ public class OpcCamTest {
         Connector<Object, Object, BeckhoffOutput, BeckhoffInput> conn = ConnectorFactory.createConnector(
             "de.iip_ecosphere.platform.connectors.opcuav1.OpcUaConnector", 
             () -> BeckhoffOPCConnector.createConnectorParameter(), 
-            BeckhoffOPCConnector.createConnectorAdapter(null, null, () -> opcNamespace, () -> opcNamespace));
+            BeckhoffOPCConnector.createConnectorAdapter(() -> opcNamespace, () -> opcNamespace));
         conn.connect(BeckhoffOPCConnector.createConnectorParameter());
         conn.setReceptionCallback(callback);
         conn.notificationsChanged(false); // force sampling independent of model

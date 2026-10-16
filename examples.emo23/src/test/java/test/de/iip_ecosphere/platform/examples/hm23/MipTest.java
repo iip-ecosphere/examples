@@ -16,14 +16,15 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import de.iip_ecosphere.platform.connectors.ConnectorFactory;
+import de.iip_ecosphere.platform.connectors.types.ChanneledConnectorOutputTypeAdapter.ChanneledSerializer;
 import de.iip_ecosphere.platform.transport.serialization.GenericJsonSerializer;
 import iip.datatypes.MipAiPythonOutput;
 import iip.datatypes.MipAiPythonOutputImpl;
+import iip.datatypes.MipMqttInput;
 import iip.datatypes.MipMqttInputImpl;
 import iip.datatypes.MipMqttOutput;
 import iip.datatypes.MipMqttOutputImpl;
-import iip.nodes.MipMQTTDataConnectorMipMqttOutputFormatterSerializer;
-import iip.nodes.MipMQTTDataConnectorMipMqttInputParserSerializer;
 import iip.serializers.MipAiPythonOutputImplSerializer;
 import org.junit.Assert;
 
@@ -86,10 +87,8 @@ public class MipTest {
      */
     @Test
     public void testMipParserFormatter() throws IOException {
-        
-        
-        MipMQTTDataConnectorMipMqttInputParserSerializer pSer 
-            = new MipMQTTDataConnectorMipMqttInputParserSerializer("US-ASCII", null, null);
+        ChanneledSerializer<MipMqttOutput> pSer = ConnectorFactory.createChanneledSerializer("MipMqttDataConn", 
+            true, MipMqttOutput.class);
         
         MipMqttOutputImpl outData = new MipMqttOutputImpl();
         outData.setMipcontext("read_idtag_data");
@@ -132,8 +131,8 @@ public class MipTest {
         inData.setMipbitstream_ai_data2("0000000000000000000000");
         inData.setMipreader(outData.getMipreader());
         
-        MipMQTTDataConnectorMipMqttOutputFormatterSerializer fSer 
-            = new MipMQTTDataConnectorMipMqttOutputFormatterSerializer("US-ASCII", null, null);
+        ChanneledSerializer<MipMqttInput> fSer = ConnectorFactory.createChanneledSerializer("MipMqttDataConn", 
+            false, MipMqttInput.class);
         GenericJsonSerializer<MipMqttInputImpl> inSer = new GenericJsonSerializer<>(MipMqttInputImpl.class);
         MipMqttInputImpl fIn = inSer.from(fSer.to(inData));
 

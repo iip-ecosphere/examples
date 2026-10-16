@@ -16,6 +16,7 @@ import java.io.IOException;
 
 import de.iip_ecosphere.platform.connectors.Connector;
 import de.iip_ecosphere.platform.connectors.ConnectorFactory;
+import de.iip_ecosphere.platform.connectors.ConnectorParameter;
 import de.iip_ecosphere.platform.examples.hm23.drive.ChannelToTimeSeriesAggregator;
 import de.iip_ecosphere.platform.services.environment.DataIngestor;
 import de.iip_ecosphere.platform.support.TimeUtils;
@@ -25,7 +26,6 @@ import iip.datatypes.AggregatedPlcEnergyMeasurement;
 import iip.datatypes.PlcEnergyIn;
 import iip.datatypes.PlcEnergyMeasurementJson;
 import iip.interfaces.ChannelToTimeSeriesAggregatorInterface;
-import iip.nodes.MqttEnergyConn;
 
 //MAY BE DELETED, NOT PERMANENT !!!
 
@@ -79,11 +79,12 @@ public class MqttEnergyTest {
         SerializerRegistry.registerSerializer(iip.serializers.PlcInputImplSerializer.class);
         SerializerRegistry.registerSerializer(iip.serializers.PlcInputSerializer.class);
         
+        ConnectorParameter params = ConnectorFactory.createConnectorParameter("mqttEnergyConn");
+
         Connector<byte[], byte[], PlcEnergyMeasurementJson, PlcEnergyIn> connDrive = ConnectorFactory.createConnector(
-            "de.iip_ecosphere.platform.connectors.mqttv3.PahoMqttv3Connector", 
-            () -> MqttEnergyConn.createConnectorParameter(), 
-            MqttEnergyConn.createConnectorAdapter());
-        connDrive.connect(MqttEnergyConn.createConnectorParameter());
+            "mqttEnergyConn", params, byte[].class, byte[].class, PlcEnergyMeasurementJson.class, PlcEnergyIn.class);
+        
+        connDrive.connect(params);
         connDrive.setReceptionCallback(callbackEnergy);
         connDrive.notificationsChanged(false); // force sampling independent of model
 

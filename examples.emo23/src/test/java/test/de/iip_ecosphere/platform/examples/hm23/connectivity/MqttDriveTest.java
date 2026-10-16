@@ -17,6 +17,7 @@ import java.io.IOException;
 
 import de.iip_ecosphere.platform.connectors.Connector;
 import de.iip_ecosphere.platform.connectors.ConnectorFactory;
+import de.iip_ecosphere.platform.connectors.ConnectorParameter;
 import de.iip_ecosphere.platform.support.TimeUtils;
 import de.iip_ecosphere.platform.support.json.Json;
 import de.iip_ecosphere.platform.transport.connectors.ReceptionCallback;
@@ -26,8 +27,6 @@ import iip.datatypes.DriveCommand;
 import iip.datatypes.DriveCommandImpl;
 import iip.datatypes.Dummy;
 import iip.datatypes.LenzeDriveMeasurement;
-import iip.nodes.DriveBeckhoffOPCConnector;
-import iip.nodes.LenzeMQTTConnector;
 
 //MAY BE DELETED, NOT PERMANENT !!!
 
@@ -106,19 +105,21 @@ public class MqttDriveTest {
         SerializerRegistry.registerSerializer(iip.serializers.DriveCommandSerializer.class);
         SerializerRegistry.registerSerializer(iip.serializers.DriveCommandImplSerializer.class);
         
+        ConnectorParameter paramsL = ConnectorFactory.createConnectorParameter("DriveLenzeMqttConn");
         Connector<byte[], byte[], LenzeDriveMeasurement, Dummy> connDrive = ConnectorFactory.createConnector(
-            "de.iip_ecosphere.platform.connectors.mqttv3.PahoMqttv3Connector", 
-            () -> LenzeMQTTConnector.createConnectorParameter(), 
-            LenzeMQTTConnector.createConnectorAdapter());
-        connDrive.connect(LenzeMQTTConnector.createConnectorParameter());
+            "DriveLenzeMqttConn", paramsL, byte[].class, byte[].class, LenzeDriveMeasurement.class, Dummy.class);
+        connDrive.connect(paramsL);
         connDrive.setReceptionCallback(callbackDrive);
         connDrive.notificationsChanged(false); // force sampling independent of model
 
+
+        ConnectorParameter paramsB = ConnectorFactory.createConnectorParameter("DriveBeckhoffOpcConn");
+
         Connector<Object, Object, DriveBeckhoffOutput, DriveCommand> connOpc = ConnectorFactory.createConnector(
-            "de.iip_ecosphere.platform.connectors.opcuav1.OpcUaConnector", 
-            () -> DriveBeckhoffOPCConnector.createConnectorParameter(), 
-            DriveBeckhoffOPCConnector.createConnectorAdapter());
-        connOpc.connect(DriveBeckhoffOPCConnector.createConnectorParameter());
+            "DriveBeckhoffOpcConn", paramsB, Object.class, Object.class, DriveBeckhoffOutput.class, DriveCommand.class);
+
+        
+        connOpc.connect(paramsB);
         connOpc.setReceptionCallback(callbackOpc);
         connOpc.notificationsChanged(false); // force sampling independent of model
 
