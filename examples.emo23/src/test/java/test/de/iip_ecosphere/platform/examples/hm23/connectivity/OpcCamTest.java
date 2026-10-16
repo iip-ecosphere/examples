@@ -17,6 +17,7 @@ import java.util.concurrent.ExecutionException;
 
 import de.iip_ecosphere.platform.connectors.Connector;
 import de.iip_ecosphere.platform.connectors.ConnectorFactory;
+import de.iip_ecosphere.platform.connectors.ConnectorParameter;
 import de.iip_ecosphere.platform.examples.hm23.CamSource;
 import de.iip_ecosphere.platform.examples.hm23.Commands;
 import de.iip_ecosphere.platform.services.environment.DataIngestor;
@@ -31,7 +32,6 @@ import iip.datatypes.BeckhoffOutput;
 import iip.datatypes.Command;
 import iip.datatypes.CommandImpl;
 import iip.datatypes.ImageInput;
-import iip.nodes.BeckhoffOPCConnector;
 
 // MAY BE DELETED, NOT PERMANENT !!!
 
@@ -119,11 +119,11 @@ public class OpcCamTest {
             System.err.println("Cannot set cam parameter: " + e.getMessage());
         }
         
+        ConnectorParameter params = ConnectorFactory.createConnectorParameter("PlcBeckhoffOpcConn");
         Connector<Object, Object, BeckhoffOutput, BeckhoffInput> conn = ConnectorFactory.createConnector(
-            "de.iip_ecosphere.platform.connectors.opcuav1.OpcUaConnector", 
-            () -> BeckhoffOPCConnector.createConnectorParameter(), 
-            BeckhoffOPCConnector.createConnectorAdapter(() -> opcNamespace, () -> opcNamespace));
-        conn.connect(BeckhoffOPCConnector.createConnectorParameter());
+            "PlcBeckhoffOpcConn", params, () -> opcNamespace, () -> opcNamespace, Object.class, Object.class, 
+            BeckhoffOutput.class, BeckhoffInput.class);
+        conn.connect(params);
         conn.setReceptionCallback(callback);
         conn.notificationsChanged(false); // force sampling independent of model
         
